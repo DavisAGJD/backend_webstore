@@ -11,7 +11,7 @@ const app = express();
 app.use(bodyParser.json());
 
 const corsOptions = {
-  origin: 'https://web-store-two-zeta.vercel.app/',
+  origin: 'https://front-webstore.onrender.com/',
   methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
   preflightContinue: false,
   optionsSuccessStatus: 204
