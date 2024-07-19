@@ -10,7 +10,7 @@ const app = express();
 
 app.use(bodyParser.json());
 
-const allowedOrigins = ['https://front-webstore.vercel.app/'];
+const allowedOrigins = ['https://front-webstore.onrender.com'];
 
 const corsOptions = {
   origin: function (origin, callback) {
