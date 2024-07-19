@@ -11,7 +11,7 @@ const app = express();
 app.use(bodyParser.json());
 
 const corsOptions = {
-  origin: 'https://front-webstore.onrender.com/',
+  origin: 'https://front-webstore.onrender.com/api',
   methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
   preflightContinue: false,
   optionsSuccessStatus: 204
