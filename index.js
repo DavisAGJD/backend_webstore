@@ -1,8 +1,6 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const cors = require('cors');
-const http = require('http'); // Asegúrate de importar http
-const startWebSocketServer = require('./websocketServer'); // Importa tu servidor WebSocket
 const userRoutes = require('./userRoutes');
 const productRoutes = require('./productRoutes');
 const orderRoutes = require('./orderRoutes');
@@ -24,14 +22,14 @@ const corsOptions = {
   },
   methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
   preflightContinue: false,
-  optionsSuccessStatus: 204,
+  optionsSuccessStatus: 204
 };
 
 app.use(cors(corsOptions));
 app.options('*', cors(corsOptions));
 
 app.get('/', (req, res) => {
-  res.send('Hola, este es tu back');
+  res.send("Hola, este es tu back");
 });
 
 app.get('/get/test/db', async (req, res) => {
@@ -50,7 +48,7 @@ app.use('/api/products', productRoutes);
 app.use('/api/', orderRoutes);
 
 app.use((req, res, next) => {
-  res.status(404).send('Página no encontrada');
+  res.status(404).send("Página no encontrada");
 });
 
 app.use((err, req, res, next) => {
@@ -58,11 +56,8 @@ app.use((err, req, res, next) => {
   res.status(500).send('Algo salió mal!');
 });
 
-const server = http.createServer(app);
-
-startWebSocketServer(server);
-
 const PORT = process.env.PORT || 5000;
-server.listen(PORT, () => {
+
+app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
 });
