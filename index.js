@@ -12,7 +12,7 @@ const PORT = process.env.PORT || 5000; // Usa la variable de entorno PORT
 
 app.use(bodyParser.json());
 
-const allowedOrigins = ['https://front-webstore.onrender.com'];
+const allowedOrigins = ['https://front-webstore-1.onrender.com'];
 
 const corsOptions = {
   origin: function (origin, callback) {
