@@ -6,11 +6,13 @@ const productRoutes = require('./productRoutes');
 const orderRoutes = require('./orderRoutes');
 const { poolPromise } = require('./db');
 
+
 const app = express();
+const PORT = process.env.PORT || 5000; // Usa la variable de entorno PORT
 
 app.use(bodyParser.json());
 
-const allowedOrigins = ['https://front-webstore-1.onrender.com'];
+const allowedOrigins = ['https://front-webstore.onrender.com'];
 
 const corsOptions = {
   origin: function (origin, callback) {
@@ -55,8 +57,6 @@ app.use((err, req, res, next) => {
   console.error(err.stack);
   res.status(500).send('Algo salió mal!');
 });
-
-const PORT = process.env.PORT || 5000;
 
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
