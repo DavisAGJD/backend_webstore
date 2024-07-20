@@ -1,7 +1,7 @@
 const WebSocket = require('ws');
 
 function startWebSocketServer(server) {
-  const wss = new WebSocket.Server({ server });
+  const wss = new WebSocket.Server({ server, path: '/ws' });
 
   wss.on('connection', (ws) => {
     console.log('WebSocket connection established');
