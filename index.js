@@ -5,6 +5,8 @@ const userRoutes = require('./userRoutes');
 const productRoutes = require('./productRoutes');
 const orderRoutes = require('./orderRoutes');
 const { poolPromise } = require('./db');
+const startWebSocketServer = require('./websocketServer'); // Import the WebSocket server
+
 
 const app = express();
 
@@ -56,8 +58,11 @@ app.use((err, req, res, next) => {
   res.status(500).send('Algo salió mal!');
 });
 
-const PORT = process.env.PORT || 5000;
+const server = http.createServer(app);
 
-app.listen(PORT, () => {
-  console.log(`Server is running on port ${PORT}`);
-});
+// Start the WebSocket server
+startWebSocketServer(server);
+
+server.listen(PORT, () => {
+    console.log(`Server is running on port ${PORT}`);
+})
