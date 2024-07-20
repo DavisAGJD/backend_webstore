@@ -7,18 +7,23 @@ function startWebSocketServer(server) {
     console.log('WebSocket connection established');
 
     ws.on('message', (message) => {
-      console.log('received: %s', message);
+      console.log('Received:', message);
+      ws.send(`You sent -> ${message}`);
     });
 
     ws.on('close', (code, reason) => {
-      console.log('WebSocket connection closed: ', code, reason);
+      console.log('WebSocket connection closed:', code, reason);
+    });
+
+    ws.on('error', (error) => {
+      console.error('WebSocket error:', error);
     });
 
     ws.send('Welcome to WebSocket server');
   });
 
   wss.on('error', (error) => {
-    console.error('WebSocket server error: ', error);
+    console.error('WebSocket server error:', error);
   });
 }
 
