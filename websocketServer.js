@@ -1,22 +1,25 @@
 const WebSocket = require('ws');
 
-const startWebSocketServer = (server) => {
-  const wss = new WebSocket.Server({ server, path: '/ws' });
+function startWebSocketServer(server) {
+  const wss = new WebSocket.Server({ server });
 
   wss.on('connection', (ws) => {
-    console.log('Client connected');
+    console.log('WebSocket connection established');
 
     ws.on('message', (message) => {
-      console.log('Received:', message);
-      ws.send(`Server received: ${message}`);
+      console.log('received: %s', message);
     });
 
-    ws.on('close', () => {
-      console.log('Client disconnected');
+    ws.on('close', (code, reason) => {
+      console.log('WebSocket connection closed: ', code, reason);
     });
+
+    ws.send('Welcome to WebSocket server');
   });
 
-  console.log('WebSocket server is running on ws://localhost:10000');
-};
+  wss.on('error', (error) => {
+    console.error('WebSocket server error: ', error);
+  });
+}
 
 module.exports = startWebSocketServer;
