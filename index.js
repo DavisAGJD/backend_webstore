@@ -1,12 +1,12 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const cors = require('cors');
+const http = require('http'); // Importar el módulo http
 const userRoutes = require('./userRoutes');
 const productRoutes = require('./productRoutes');
 const orderRoutes = require('./orderRoutes');
 const { poolPromise } = require('./db');
-const startWebSocketServer = require('./websocketServer'); // Import the WebSocket server
-
+const startWebSocketServer = require('./websocketServer'); // Importar el servidor WebSocket
 
 const app = express();
 
@@ -58,11 +58,13 @@ app.use((err, req, res, next) => {
   res.status(500).send('Algo salió mal!');
 });
 
+const PORT = process.env.PORT || 5000;
+
 const server = http.createServer(app);
 
 // Start the WebSocket server
 startWebSocketServer(server);
 
 server.listen(PORT, () => {
-    console.log(`Server is running on port ${PORT}`);
-})
+  console.log(`Server is running on port ${PORT}`);
+});
